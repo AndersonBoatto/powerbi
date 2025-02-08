@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Power BI</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        .iframe-container {
+            position: relative;
+            width: 100%;
+            max-width: 1140px; /* Limita a largura máxima */
+            height: 0;
+            padding-bottom: 47.5%; /* Proporção 16:9 */
+            background-color: #fff;
+        }
+
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        @media (max-width: 768px) {
+            .iframe-container {
+                padding-bottom: 56.25%; /* Ajuste para uma proporção mais adequada em dispositivos móveis */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="iframe-container">
+        <iframe title="CONTROLE DE MEDIÇÕES" src="https://app.powerbi.com/reportEmbed?reportId=0a1e4b12-8cb5-4645-9301-c44340abaea3&autoAuth=true&ctid=cf72e2bd-7a2b-4783-bdeb-39d57b07f76f" allowFullScreen="true"></iframe>
+    </div>
+
+</body>
+</html>
